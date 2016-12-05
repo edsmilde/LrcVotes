@@ -16,14 +16,15 @@ if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 $topic_id = intval($_REQUEST['topicId']);
 
 // Get scores of posts in topic
-$query = "SELECT post_id, score FROM posts WHERE topic_id=$topic_id";
+$query = "SELECT post_id, upvotes, downvotes FROM posts WHERE topic_id=$topic_id";
 $result = mysql_query($query, $conn);
 
 ?>
 posts: {<?php
 while ($row = mysql_fetch_assoc($result)) {
 	$post_id = $row['post_id'];
-	$score = $row['score'];
+	$upvotes = $row['upvotes'];
+	$downvotes = $row['downvotes'];
 	echo "
 	'post_$post_id': $score,";
 	
